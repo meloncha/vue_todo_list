@@ -1,0 +1,872 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.4.2/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		{{message}}
+
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue.js!',
+			},
+			beforeCreate(){
+				console.log("beforeCreated");
+			},
+			created(){
+				console.log("created");
+			},
+			mounted(){
+				console.log('mounted');
+				this.message = 'Hello Vue!';
+			},
+			updated(){
+				console.log('updated');
+			},			
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.4.2/dist/vue.js"></script>
+
+	<title>Document</title>
+</head>
+<body>
+	<div id = "app">
+		<button>컴포넌트등록</button>
+		<my-component> </my-component>
+	</div>
+
+	<script>
+		// 전역 컴포넌트 등록하기
+		Vue.component('my-component', {
+			template: `
+			<div>
+				전역 컴포넌트가 등록되었습니다!
+			</div>
+			`,
+		});
+
+		new Vue({
+			el: '#app',
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.4.2/dist/vue.js"></script>
+
+	<title>Document</title>
+</head>
+<body>
+	<div id = "app">
+		<button>컴포넌트 등록</button>
+		<my-local-component></my-local-component>
+	</div>
+
+	<script>
+		let cmp = {
+			// 컴포넌트 내용
+			template: `
+			<div>
+				지역 컴포넌트가 등록되었습니다!
+			</div>
+			`,
+		};
+
+		new Vue({
+			el: '#app',
+			components: {
+				'my-local-component': cmp,
+			},
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.4.2/dist/vue.js"></script>
+
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<h3>첫 번째 인스턴스 영역</h3>
+		<my-global-component></my-global-component>
+		<my-local-component></my-local-component>
+	</div>
+	<script>
+		// 전역 컴포넌트 등록
+		Vue.component('my-global-component', {
+			template: '<div>전역 컴포넌트 입니다.</div>',
+		});
+		// 지역 컴포넌트 내용
+		let cmp = {
+			template: '<div>지역 컴포넌트 입니다.</div>',
+		};
+		new Vue({
+			el: '#app',
+			// 지역 컴포넌트 등록
+			components: {
+				'my-local-component': cmp,
+			},
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.4.2/dist/vue.js"></script>
+
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<h3>첫 번째 인스턴스 영역</h3>
+		<my-global-component></my-global-component>
+		<my-local-component></my-local-component>
+	</div>
+	<hr>
+	<div id="app2">
+		<h3>두 번째 인스턴스 영역</h3>
+		<my-global-component></my-global-component>
+		<my-local-component></my-local-component>
+	</div>
+	<script>
+		Vue.component('my-global-component', {
+			template: `<div>전역 컴포넌트</div>`,
+		});
+
+		let cmp = {
+			template: `<div>지역 컴포넌트</div>`,
+		};
+
+		new Vue({
+			el: '#app',
+			components: {
+				'my-local-component': cmp,
+			},
+		});
+		new Vue({
+			el: '#app2',
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.4.2/dist/vue.js"></script>
+
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<header>
+			<h3>{{ message }}</h3>
+		</header>
+		<todo-footer></todo-footer>
+		<todo-list></todo-list>
+
+	</div>
+	<script>
+		Vue.component('todo-footer', {
+			template: `<div>
+				<p>This is another global child component</p>
+				</div>`,
+		});
+
+		let cmp = {
+			template: `<div>
+				<p>This is another local child component</p>
+				</div>`,
+		};
+
+		new Vue({
+			el: '#app',
+			data: {
+				message: 'This is a parent component',
+			},
+			components: {
+				'todo-list': cmp,
+			},
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.4.2/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<my-component1></my-component1>
+		<my-component2></my-component2>
+	</div>
+	<script>
+		var cmp1 = {
+			template: '<div>first local component : {{ cmp1Data }}</div>',
+			data: function(){
+				return{
+					cmp1Data: 100
+				}
+			}
+		};
+		var cmp2 = {
+			template: '<div>second local component : {{ cmp2Data }}</div>',
+			data: function(){
+				return {
+					cmp2Data : cmp1.data.cmp1Data
+				}
+			}
+		};
+		new Vue({
+			el: '#app',
+			components: {
+				'my-component1': cmp1,
+				'my-component2': cmp2,
+			}
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.4.2/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<child-component v-bind:propsdata="message"></child-component>
+	</div>
+	<script>
+		Vue.component('child-component', {
+			props: [
+				'propsdata',
+			],
+			template: `<p>{{ propsdata }}</p>`,
+		});
+		new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue! passed from Parent Component',
+			}
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.4.2/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<child-component v-on:show-log="printText"></child-component>
+	</div>
+	<script>
+		Vue.component('child-component', {
+			template: '<button v-on:click="showLog">show</button>',
+			methods: {
+				showLog: function(){
+					this.$emit('show-log');
+				}
+			},
+		});
+		new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue! passed from Parent Component',
+			},
+			methods: {
+				printText(){
+					console.log('received an event');
+				}
+			},
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<child-component></child-component>
+	</div>
+	<script>
+		const eventBus = new Vue();
+		Vue.component('child-component', {
+			template: `<div>
+				하위 컴포넌트 영역입니다.
+				<button v-on:click="showLog">show</button>
+			</div>`,
+			methods: {
+				showLog: function(){
+					eventBus.$emit('triggerEventBus', 100);
+				},
+			},
+		});
+
+		const app = new Vue({
+			el: '#app',
+			created: function(){
+				eventBus.$on('triggerEventBus', value => {
+					console.log('이벤트를 전달받음.전달받은 값 : ', value);
+				});
+			},
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<child-component v-bind:propsdata="message"></child-component>
+		<sibling-component v-bind:propsdata="anotherMessage"></sibling-component>
+	</div>
+	<script>
+		Vue.component('sibling-component', {
+			props: [
+				'propsdata',
+			],
+			template: '<div>{{ propsdata }}</div>',
+		});
+		Vue.component('child-component', {
+			props: [
+				'propsdata',
+			],
+			template: '<div>{{ propsdata }}</div>',
+		});
+		new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue! passed from Parent Component',
+				anotherMessage: 'Tiger',
+			}
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<h1>뷰 라우터 예제</h1>
+		<p>
+			<router-link to="/main">Main 컴포넌트로 이동</router-link>
+			<router-link to="/login">Login 컴포넌트로 이동</router-link>
+		</p>
+		<router-view></router-view>
+	</div>
+	<script>
+		const Main = { template: '<div>main</div>'};
+		const Login = { template: '<div>login</div>'};
+		const routes = [
+			{ path: '/main', component: Main},
+			{ path: '/login', component: Login},
+		];
+		const router = new VueRouter({
+			routes
+		});
+		const app = new Vue({
+			router
+		}).$mount('#app');
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<router-view></router-view>
+	</div>
+	<script>
+		const User = {
+			template: `
+				<div>
+					User Component
+					<router-view></router-view>
+				</div>
+			`,
+		};
+		const UserProfile = { template : '<p>User Profile Component</p>' };
+		const UserPost = { template : '<p>User Post Component</p>' };
+
+		const routes = [
+			{
+				path : '/user',
+				component: User,
+				children: [
+					{
+						path: 'posts',
+						component: UserPost,
+					},
+					{
+						path: 'profile',
+						component: UserProfile,
+					},
+				]
+			}
+		];
+
+		const router = new VueRouter({
+			routes
+		});
+
+		const app = new Vue({
+			router
+		}).$mount('#app');
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<router-view name="header"></router-view>
+		<router-view></router-view>
+		<router-view name="footer"></router-view>
+	</div>
+	<script>
+		const Body = { template: '<div>This is Body</div>' };
+		const Header = { template: '<div>This is Header</div>' };
+		const Footer = { template: '<div>This is Footer</div>' };
+
+		const LoginBody = { template: '<div>login body</div>'};
+		const LoginHeader = { template: '<div>login header</div>'};
+		const LoginFooter = { template: '<div>login footer</div>'};
+
+		const router = new VueRouter({
+			routes: [
+				{
+					path: '/',
+					components: {
+						default: Body,
+						header: Header,
+						footer: Footer,
+					},
+				},
+				{
+					path: '/login',
+					components: {
+						default: LoginBody,
+						header: LoginHeader,
+						footer: LoginFooter,
+					},
+				},
+			],
+		});
+		// 복수형 확인하고 쓰자.!!!!!!! 복수형과 단수형의 구분이 상당히 중요하다.
+		const app = new Vue({
+			router
+		}).$mount('#app');
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+		<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<button @click="getData">프레임워크 목록 가져오기</button>
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			methods: {
+				getData() {
+					this.$http.get('https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json')
+						.then( function(response) {
+							console.log(response);
+							console.log(JSON.parse(response.data));
+						});
+				},
+			},
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<button @click="getData">프레임워크 목록 가져오기</button>
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			methods: {
+				getData(){
+					axios.get('https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json')
+						.then( response => {
+							console.log(response);
+						});
+				},
+			},
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<p v-bind:id="idA">아이디 바인딩</p>
+		<p v-bind:class="classA">클래스 바인딩</p>
+		<p v-bind:style="styleA">스타일 바인딩</p>
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				idA: 10,
+				classA: 'container',                                      
+				styleA: 'color: blue'
+			}
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<p>{{ message }}</p>
+		<p>{{ message + "!!!"}}</p>
+		<p>{{ message.split('').reverse().join('') }}</p>
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue.js!',
+			}
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		{{ const a = 10; }}
+		{{ if (true) { return 100} }}
+		{{ true ? 100 : 0 }}
+
+		{{ message.split('').reverse().join('') }}
+		{{ reversedMessage }}
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue.js!',
+			},
+			computed: {
+				reversedMessage() {
+					return this.message.split('').reverse().join('');
+				}
+			}
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app"> 
+		<a v-if="flag">두잇 Vue.js</a>
+		<ul>
+			<li v-for="system in systems">{{ system }}</li>
+		</ul>
+		<p v-show="flag">두잇 Vue.js</p>
+		<h5 v-bind:id="uid">뷰 입문서</h5>
+		<button v-on:click="popupAlert">경고 창 버튼</button>
+		<br>
+		<button v-on:click="flag = !flag">토글</button><br><br>
+		<button v-on:click="clickBtn">클릭</button>
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				flag : true,
+				systems: [
+					'android',
+					'ios',
+					'windows',
+				],
+				uid: 10,
+			},
+			methods: {
+				popupAlert(){
+					return alert('경고 창 표시');
+				},
+				clickBtn(event){
+					console.log(event);
+				}
+			},
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<p>{{ reversedMessage }}</p><br>
+		<p>{{ message }}</p>
+		<button v-on:click="reverseMsg">문자열 역순</button>
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue.js!',
+			},
+			methods: {
+				reverseMsg(){
+					this.message = this.message.split('').reverse().join('');
+					return this.message;
+				}
+			},
+			computed: {
+				reversedMessage(){
+					return this.message.split('').reverse().join('');
+				}
+			}
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<input v-model="message">
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue.js!'
+			},
+			watch: {
+				message(data) {
+					console.log(`message의 값이 바뀝니다 : ${data}`);
+				}
+			}
+		});
+	</script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<header>
+			<h3>
+				{{ message }},
+				{{ message2 }}
+			</h3>
+		</header>
+		<section>
+			<p v-bind:id="uid"></p>
+			<button v-on:click="clickBtn">alert</button>
+			<button v-on:click="click">클릭</button>
+			<ul v-show="flag">
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>
+			<br>
+			<button v-on:click="flag = !flag">toggle</button>
+		</section>
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue.js!',
+				message2: 'I want number ONE!',
+				uid: '10',
+
+				flag: true,
+			},
+			methods: {
+				clickBtn(){
+					console.log('hi');
+				},
+				click(){
+					alert('hello');
+				}
+			}
+		});
+	</script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+		});
+	</script>
+</body>
+</html>
